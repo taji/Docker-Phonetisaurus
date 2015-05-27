@@ -1,0 +1,11 @@
+#!/bin/bash
+# run docker container as :
+#   --publish = map the host port to the internal container port. In this case:
+#            4242 = zeromq port.
+#   --interactive  = interactive mode. Docker will allow us to interact with the shell.
+#   --tty = Allocate a pseudo-TTY, you need both -i and -t to shell immediately into the container you are running.
+#   --volume /hostpath:/containerpath = mount the hostpath directory from the host environment inside the container. 
+#      This allows us to make changes in our host environment which are “replicated” inside the Docker container.
+#   --workdir set the working directory to this folder.
+#   /bin/bash = immediately open a bash shell in the container.
+docker run -p=4242:4242 --interactive --tty --volume="/home/toddg/g2p-dev:/g2p-dev" --workdir="/g2p-dev" --name="g2p" taji/g2p /bin/bash
